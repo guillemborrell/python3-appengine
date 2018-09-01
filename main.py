@@ -58,13 +58,13 @@ def serve_css(path):
     return send_from_directory(str(css_folder), path)
 
 
-@app.route('/img/<path:path>')
-def serve_img(path):
+@app.route('/images/<path:path>')
+def serve_images(path):
     """Serve Javascript static files"""
     this_file = inspect.getfile(inspect.currentframe())
     this_path = pathlib.Path(this_file)
-    img_folder = this_path.parent / 'img'
-    return send_from_directory(str(img_folder), path)
+    images_folder = this_path.parent / 'images'
+    return send_from_directory(str(images_folder), path)
 
 
 @app.route('/lib/<path:path>')
