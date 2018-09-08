@@ -87,7 +87,7 @@ p {
   padding: 0;
   font-size: 15px;
   color: #999999;
-  line-height: 28px;
+  line-height: 1.5em;
 }
 
 ::-moz-selection {
@@ -247,7 +247,7 @@ nav ul li a {
 
 
 #header .header-content {
-  height: 100vh;
+  /*height: 100vh; */
   text-align: left;
   width: 100%;
   display: flex;
@@ -261,6 +261,7 @@ nav ul li a {
   margin-bottom: 10px;
   text-transform: uppercase;
   color: #fff;
+  text-shadow: 2px 2px 1px black;
 }
 
 .header-content p {
@@ -271,6 +272,15 @@ nav ul li a {
   text-transform: capitalize;
   color: #fff;
   font-weight: 500;
+  text-shadow: 1px 1px 1px black;
+}
+
+.header-content a {
+  color: #fff;
+}
+
+.header-content a:hover {
+  color: yellow;
 }
 
 .header-content .list-social li {

@@ -79,7 +79,7 @@ $(document).ready(function() {
 
   $(function() {
     typed.typed({
-      strings: ["Alex Smith.", "Designer.", "Developer.", "Freelancer.", "Photographer"],
+      strings: ["Iglesia de San Jerónimo el Real", "10 de noviembre de 2018, 13:00"],
       typeSpeed: 100,
       loop: true,
     });
