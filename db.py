@@ -6,7 +6,9 @@ import json
 client = datastore.Client(project='beatrizyguillem')
 
 def add_entity(kind='Test', **kwargs):
-    """Create a registry for every time the app has ben run, to test the db"""
+    """Add entity to the DB
+
+    """
     key = client.key(kind)
     boot_e = datastore.Entity(key=key)
     boot_e.update(kwargs)

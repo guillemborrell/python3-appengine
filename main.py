@@ -13,12 +13,13 @@
 # limitations under the License.
 
 # [START gae_python37_app]
-from flask import Flask, send_from_directory
-from db import add_entity
+from flask import Flask, send_from_directory, request, abort
+from db import add_entity, client
 from datetime import datetime
 from jinja2 import Template
 import inspect
 import pathlib
+from uuid import uuid4
 
 def get_curent_file():
     filename = inspect.getfile(inspect.currentframe())
@@ -31,6 +32,10 @@ app = Flask(__name__)
 @app.route('/')
 def hello():
     """Return a friendly HTTP greeting."""
+    # generate a random link and for the account.
+    access_key = uuid4()
+    add_entity(kind='Link', key=str(access_key), visited=False)
+    
     this_file = inspect.getfile(inspect.currentframe())
     this_path = pathlib.Path(this_file)
     template_file = this_path.parent / 'templates' / 'index.html'
@@ -38,7 +43,24 @@ def hello():
     with template_file.open() as f:
         template = Template(f.read())
     
-    return template.render()
+    return template.render(key=access_key)
+
+@app.route('/regalos')
+def regalos():
+    access_key = request.args.get('key')
+    query = client.query(kind='Link')
+    query.add_filter('key', '=', access_key)
+    key = list(query.fetch())
+
+    if not key:
+        abort(404)
+
+    this_file = inspect.getfile(inspect.currentframe())
+    this_path = pathlib.Path(this_file)
+    template_file = this_path.parent / 'templates' / 'regalos.html'
+
+    with template_file.open() as f:
+        template = Template(f.read())
 
 @app.route('/js/<path:path>')
 def serve_js(path):
